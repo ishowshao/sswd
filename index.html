@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <title>谁是卧底游戏助手</title>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+        <div id="step-1">
+            <h4>第一步：选择游戏类型</h4>
+            <div class="type">
+                <button id="original" type="button" class="btn btn-success btn-block">谁是卧底 原版</button>
+                <p class="text-info">原版：玩家自己不知道自己的身份</p>
+            </div>
+            <div class="type">
+                <button id="advanced" type="button" class="btn btn-primary btn-block">谁是卧底 增强版</button>
+                <p class="text-info">增强版：玩家自己知道自己的身份，伪装、猜疑、分析，让游戏趣味性更强，玩了你就知道</p>
+            </div>
+        </div>
+        <div id="step-2" class="hidden">
+            <h4>第二步：游戏设置</h4>
+            <form>
+                <div class="form-group">
+                    <label for="civilian-count">平民人数</label>
+                    <input type="number" class="form-control" id="civilian-count" placeholder="5">
+                </div>
+                <div class="form-group">
+                    <label for="spy-count">卧底人数</label>
+                    <input type="number" class="form-control" id="spy-count" placeholder="2">
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" checked> 有法官
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label class="radio-inline">
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked> 法官出词
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> 系统选词
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="civilian-word">平民词</label>
+                    <input type="text" class="form-control" name="civilian-word" id="civilian-word">
+                </div>
+                <div class="form-group">
+                    <label for="spy-word">卧底词</label>
+                    <input type="text" class="form-control" name="spy-word" id="spy-word">
+                </div>
+                <button type="submit" class="btn btn-default">设置好了</button>
+            </form>
+        </div>
+    </div>
+    <script src="js/zepto.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
