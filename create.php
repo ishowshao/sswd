@@ -1,8 +1,9 @@
 <?php
-// 数据校验
+// 数据校验 前端表单会做完整的校验，如果到达这里的数据还是不对，直接当非正常请求处理
 $required = array('civilian-count', 'spy-count', 'word-by', 'civilian-word', 'spy-word', 'game-type');
 foreach ($required as $key) {
     if (!isset($_POST[$key])) {
+        header('Location: index.html');
         exit;
     }
 }
@@ -12,7 +13,20 @@ $wordBy = trim($_POST['word-by']);
 $civilianWord = trim($_POST['civilian-word']);
 $spyWord = trim($_POST['spy-word']);
 $gameType = trim($_POST['game-type']);
-// 数据存储
+$hasJudge = isset($_POST['has-judge']);
+
+if ($civilianCount < 1 || $spyCount < 1 || strlen($civilianWord) === 0 || strlen($spyWord) === 0) {
+    header('Location: index.html');
+    exit;
+}
+if ($gameType !== 'original' && $gameType !== 'advanced') {
+    header('Location: index.html');
+    exit;
+}
+if ($wordBy !== 'judge' && $wordBy !== 'auto') {
+    header('Location: index.html');
+    exit;
+}
 
 // 生成id
 do {
@@ -24,6 +38,7 @@ $data = array(
     'civilian-count' => $civilianCount,
     'spy-count' => $spyCount,
     'word-by' => $wordBy,
+    'has-judge' => $hasJudge,
     'civilian-word' => $civilianWord,
     'spy-word' => $spyWord,
     'game-type' => $gameType,
@@ -47,8 +62,9 @@ shuffle($players);
 shuffle($players);
 $data['players'] = $players;
 
+// 数据存储
 file_put_contents($dataFileName, json_encode($data));
-// 写文件
+
 ?><!DOCTYPE html>
 <html>
 <head>
