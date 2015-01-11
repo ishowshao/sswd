@@ -18,21 +18,21 @@ if (!$data) {
     exit('Inner error');
 }
 
-if (!isset($_SESSION['player'])) {
-    $players = $data['players'];
-    foreach ($players as $key => $player) {
+$joinedCount = 0;
+if (!isset($_SESSION['player']) || (isset($_SESSION['id']) && $_SESSION['id'] !== $id)) {
+    foreach ($data['players'] as $key => $player) {
         if ($player['joined']) {
+            $joinedCount++;
             continue;
         } else {
             $data['players'][$key]['joined'] = true;
             file_put_contents($dataFileName, json_encode($data));
             $_SESSION['player'] = $player;
             $_SESSION['word'] = $data[$player['type'] . '-word'];
+            $_SESSION['id'] = $id;
             break;
         }
     }
-} else {
-    $player = $_SESSION['player'];
 }
 ?><!DOCTYPE html>
 <html>
@@ -43,10 +43,19 @@ if (!isset($_SESSION['player'])) {
     <title>谁是卧底游戏助手</title>
 </head>
 <body>
-<div>你的角色是</div>
-<div><?php echo $player['type'] === 'spy' ? '卧底' : '平民' ?></div>
-<div>请记住你的词语</div>
-<script src="js/zepto.min.js"></script>
-<script src="js/room.js"></script>
+<?php
+if ($joinedCount === count($data['players'])) {
+?>
+    <div>房间已满</div>
+<?php
+} else {
+?>
+    <div>你的角色是</div>
+    <div><?php echo $_SESSION['player']['type'] === 'spy' ? '卧底' : '平民' ?></div>
+    <div>请记住你的词语</div>
+    <div><?php echo $_SESSION['word'] ?></div>
+<?php
+}
+?>
 </body>
 </html>
