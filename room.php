@@ -12,7 +12,7 @@ if (!file_exists($dataFileName)) {
 }
 
 session_start();
-    
+
 $data = json_decode(file_get_contents($dataFileName), true);
 if (!$data) {
     exit('Inner error');
