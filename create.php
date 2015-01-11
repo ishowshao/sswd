@@ -27,7 +27,26 @@ $data = array(
     'civilian-word' => $civilianWord,
     'spy-word' => $spyWord,
     'game-type' => $gameType,
+    'players' => array(),
 );
+$players = array();
+
+for ($i = 0; $i < $civilianCount; $i++) {
+    $players[] = array(
+        'type' => 'civilian',
+        'joined' => false,
+    );
+}
+for ($i = 0; $i < $spyCount; $i++) {
+    $players[] = array(
+        'type' => 'spy',
+        'joined' => false,
+    );
+}
+shuffle($players);
+shuffle($players);
+$data['players'] = $players;
+
 file_put_contents($dataFileName, json_encode($data));
 // 写文件
 ?><!DOCTYPE html>
@@ -48,12 +67,19 @@ file_put_contents($dataFileName, json_encode($data));
         p {
             margin: 8px 0;
         }
+        img {
+            display: block;
+            margin: 0 auto;
+        }
     </style>
 </head>
 <body>
 <div>
     <p>房间号如下，请把此页面发送给参与玩家或者让玩家扫二维码</p>
     <p class="room-number"><?php echo $id ?></p>
+    <div>
+        <img src="http://ishowshao.com/phpqrcode/index.php?data=<?php echo urlencode('http://192.168.0.100/sswd/room.php?id=' . $id) ?>">
+    </div>
 </div>
 <script src="js/zepto.min.js"></script>
 </body>
