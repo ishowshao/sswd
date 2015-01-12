@@ -23,16 +23,40 @@
             background: url(http://ishowshao-game.qiniudn.com/sswd/sswd-1024.png) center;
             background-size: cover;
         }
+        #logo {
+            text-align: center;
+            font-size: 50px;
+            margin: 60px 0 180px;
+            color: #333333;
+        }
         a {
             display: block;
+            text-decoration: none;
+            margin: 10px auto;
             padding: 10px;
+            background: #333;
+            color: #fff;
+            border-radius: 4px;
+            text-align: center;
+            width: 100px;
+            box-shadow: inset 0 0 3px #ebf8f6;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 <div id="container" class="container">
-    <a href="">创建游戏</a>
-    <a href="">加入房间</a>
+    <div id="logo">谁是卧底</div>
+    <a href="create.html">创建游戏</a>
+    <a id="join" href="javascript:">加入房间</a>
 </div>
+<script>
+    document.getElementById('join').addEventListener('click', function () {
+        var id = window.prompt('请输入房间号');
+        if (id) {
+            window.location.href = 'room.php?id=' + id.trim();
+        }
+    });
+</script>
 </body>
 </html>
