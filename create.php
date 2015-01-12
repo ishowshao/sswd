@@ -94,7 +94,7 @@ file_put_contents($dataFileName, json_encode($data));
     <p>房间号如下，请把此页面发送给参与玩家或者让玩家扫二维码</p>
     <p class="room-number"><?php echo $id ?></p>
     <div>
-        <img src="http://ishowshao.com/phpqrcode/index.php?data=<?php echo urlencode('http://192.168.0.100/sswd/room.php?id=' . $id) ?>">
+        <img src="http://ishowshao.com/phpqrcode/index.php?data=<?php echo urlencode('http://ishowshao.com/sswd/room.php?id=' . $id) ?>">
     </div>
 </div>
 <script src="js/zepto.min.js"></script>
