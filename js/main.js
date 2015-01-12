@@ -15,7 +15,7 @@ Zepto(function () {
     $('[name=word-by]').on('change', function () {
         if (this.value === 'auto') {
             // ajax
-            $.get('word.php', function (res) {
+            $.get('word.php?game-type=' + $('#game-type').val(), function (res) {
                 if (res) {
                     res = JSON.parse(res);
                     $('#civilian-word').val(res.data.civilian);
