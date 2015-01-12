@@ -41,6 +41,18 @@ if (!isset($_SESSION['player']) || (isset($_SESSION['id']) && $_SESSION['id'] !=
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
     <title>谁是卧底游戏助手</title>
+    <style>
+        .secret {
+            color: #ffffff;
+        }
+        div {
+            margin-bottom: 16px;
+        }
+        #look {
+            padding: 10px;
+            border: 1px solid #000000;
+        }
+    </style>
 </head>
 <body>
 <?php
@@ -50,12 +62,27 @@ if ($joinedCount === count($data['players'])) {
 <?php
 } else {
 ?>
-    <div>你的角色是</div>
-    <div><?php echo $_SESSION['player']['type'] === 'spy' ? '卧底' : '平民' ?></div>
-    <div>请记住你的词语</div>
-    <div><?php echo $_SESSION['word'] ?></div>
+    <div>你的角色是：<span id="type" class="secret"><?php echo $_SESSION['player']['type'] === 'spy' ? '卧底' : '平民' ?></span></div>
+
+    <div>你的词语是：<span id="word" class="secret"><?php echo $_SESSION['word'] ?></span></div>
+
+    <button id="look">按住看</button>
 <?php
 }
 ?>
+<script>
+    var el = function (id) {
+        return document.getElementById(id);
+    };
+    el('look').addEventListener('touchstart', function (e) {
+        e.preventDefault();
+        el('type').classList.remove('secret');
+        el('word').classList.remove('secret');
+    });
+    el('look').addEventListener('touchend', function () {
+        el('type').classList.add('secret');
+        el('word').classList.add('secret');
+    });
+</script>
 </body>
 </html>
