@@ -33,7 +33,6 @@ Zepto(function () {
         $(this.parentNode)[this.value ? 'removeClass' : 'addClass']('has-error');
     });
     $('form [type=submit]').on('click', function (e) {
-        e.preventDefault();
         var required = 0;
         $('input[type=number],input[type=text]').each(function () {
             if (!this.value) {
@@ -42,8 +41,8 @@ Zepto(function () {
                 required++;
             }
         });
-        if (required === 4) {
-            $('form').submit();
+        if (required !== 4) {
+            e.preventDefault();
         }
     });
 });
