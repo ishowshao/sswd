@@ -4,7 +4,43 @@
     <meta charset="utf-8">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
-    <title>谁是卧底 - 游戏助手</title>
+    <title>谁是卧底游戏助手</title>
+    <script>
+        (function () {
+            var shareData = {
+                imgUrl: 'http://iwan.baidu.com/xxx_xiaoyouxi/static/icon/iwan256.png',
+                timeLineLink: 'http://iwan.baidu.com/xxx_xiaoyouxi/index.html',
+                tTitle: '小游戏大全 - 百度爱玩',
+                tContent: '小游戏大全 - 百度爱玩'
+            };
+
+            document.addEventListener('WeixinJSBridgeReady', function () {
+                alert('test');
+                WeixinJSBridge.on('menu:share:appmessage', function () {
+                    WeixinJSBridge.invoke('sendAppMessage', {
+                        img_url: shareData.imgUrl,
+                        link: shareData.timeLineLink,
+                        desc: shareData.tContent,
+                        title: shareData.tTitle
+                    }, onShareComplete);
+                });
+                WeixinJSBridge.on('menu:share:timeline', function () {
+                    WeixinJSBridge.invoke('shareTimeline', {
+                        img_url: shareData.imgUrl,
+                        img_width: 640,
+                        img_height: 640,
+                        link: shareData.timeLineLink,
+                        desc: shareData.tContent,
+                        title: shareData.tTitle
+                    }, onShareComplete);
+                });
+            });
+
+            function onShareComplete(res) {
+                alert(JSON.stringify(res));
+            }
+        })();
+    </script>
     <style>
         body {
             margin: 0;
@@ -45,9 +81,6 @@
     </style>
 </head>
 <body>
-<div style="display:none">
-    <img src="http://ishowshao-game.qiniudn.com/sswd/sswd-1024.png">
-</div>
 <div id="container" class="container">
     <div id="logo">谁是卧底</div>
     <a href="create.html">创建游戏</a>
