@@ -78,10 +78,10 @@ file_put_contents($dataFileName, json_encode($data));
         }
         .room-number {
             font-size: 50px;
-            text-align: center;
         }
         p {
             margin: 8px 0;
+            text-align: center;
         }
         img {
             display: block;
@@ -96,6 +96,13 @@ file_put_contents($dataFileName, json_encode($data));
     <div>
         <img src="http://ishowshao.com/phpqrcode/index.php?data=<?php echo urlencode('http://ishowshao.com/sswd/room.php?id=' . $id) ?>">
     </div>
+    <?php
+    if (!$hasJudge) {
+    ?>
+        <p><a href="http://ishowshao.com/sswd/room.php?id=<?php echo $id ?>">自己也加入房间</a></p>
+    <?php
+    }
+    ?>
 </div>
 <script src="js/zepto.min.js"></script>
 </body>
