@@ -6,36 +6,38 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
     <title>谁是卧底游戏助手</title>
     <script>
-        var shareData = {
-            imgUrl: 'http://ishowshao-game.qiniudn.com/sswd/sswd-256.jpg',
-            timeLineLink: 'http://5g.baidu.com',
-            tTitle: '谁是卧底',
-            tContent: '谁是卧底'
-        };
+        (function () {
+            var shareData = {
+                imgUrl: 'http://iwan.baidu.com/xxx_xiaoyouxi/static/icon/iwan256.png',
+                timeLineLink: 'http://iwan.baidu.com/xxx_xiaoyouxi/index.html',
+                tTitle: '小游戏大全 - 百度爱玩',
+                tContent: '小游戏大全 - 百度爱玩'
+            };
 
-        document.addEventListener('WeixinJSBridgeReady', function () {
-            WeixinJSBridge.on('menu:share:appmessage', function () {
-                WeixinJSBridge.invoke('sendAppMessage', {
-                    img_url: shareData.imgUrl,
-                    link: shareData.timeLineLink,
-                    desc: shareData.tContent,
-                    title: shareData.tTitle
-                }, onShareComplete);
+            document.addEventListener('WeixinJSBridgeReady', function () {
+                WeixinJSBridge.on('menu:share:appmessage', function () {
+                    WeixinJSBridge.invoke('sendAppMessage', {
+                        img_url: shareData.imgUrl,
+                        link: shareData.timeLineLink,
+                        desc: shareData.tContent,
+                        title: shareData.tTitle
+                    }, onShareComplete);
+                });
+                WeixinJSBridge.on('menu:share:timeline', function () {
+                    WeixinJSBridge.invoke('shareTimeline', {
+                        img_url: shareData.imgUrl,
+                        img_width: 640,
+                        img_height: 640,
+                        link: shareData.timeLineLink,
+                        desc: shareData.tContent,
+                        title: shareData.tTitle
+                    }, onShareComplete);
+                });
             });
-            WeixinJSBridge.on('menu:share:timeline', function () {
-                WeixinJSBridge.invoke('shareTimeline', {
-                    img_url: shareData.imgUrl,
-                    img_width: 640,
-                    img_height: 640,
-                    link: shareData.timeLineLink,
-                    desc: shareData.tContent,
-                    title: shareData.tTitle
-                }, onShareComplete);
-            });
-        });
 
-        function onShareComplete(res) {
-        }
+            function onShareComplete(res) {
+            }
+        })();
     </script>
     <style>
         body {
