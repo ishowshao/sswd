@@ -10,12 +10,15 @@ Zepto(function () {
         } else {
             alert('您选择的是无法官玩法，只能由系统自动选择平民和卧底的词语');
             $('.judge-setting').addClass('hidden');
+            $('#word-auto').click();
         }
     });
     $('[name=word-by]').on('change', function () {
         if (this.value === 'auto') {
+            $('#submit').attr('disabled', 'disabled');
             // ajax
             $.get('word.php?game-type=' + $('#game-type').val(), function (res) {
+                $('#submit').removeAttr('disabled');
                 if (res) {
                     res = JSON.parse(res);
                     $('#civilian-word').val(res.data.civilian);
