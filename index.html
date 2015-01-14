@@ -57,6 +57,36 @@
             window.location.href = 'room.php?id=' + id.trim();
         }
     });
+    var shareData = {
+        imgUrl: 'http://ishowshao-game.qiniudn.com/sswd/sswd-256.png',
+        timeLineLink: 'http://ishowshao.com/sswd/index.html',
+        tTitle: '谁是卧底 - 游戏助手',
+        tContent: '谁是卧底 - 游戏助手'
+    };
+
+    document.addEventListener('WeixinJSBridgeReady', function () {
+        WeixinJSBridge.on('menu:share:appmessage', function () {
+            WeixinJSBridge.invoke('sendAppMessage', {
+                img_url: shareData.imgUrl,
+                link: shareData.timeLineLink,
+                desc: shareData.tContent,
+                title: shareData.tTitle
+            }, onShareComplete);
+        });
+        WeixinJSBridge.on('menu:share:timeline', function () {
+            WeixinJSBridge.invoke('shareTimeline', {
+                img_url: shareData.imgUrl,
+                img_width: 640,
+                img_height: 640,
+                link: shareData.timeLineLink,
+                desc: shareData.tContent,
+                title: shareData.tTitle
+            }, onShareComplete);
+        });
+    });
+
+    function onShareComplete(res) {
+    }
 </script>
 </body>
 </html>
