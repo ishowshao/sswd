@@ -15,6 +15,7 @@
             };
 
             document.addEventListener('WeixinJSBridgeReady', function () {
+                alert('test');
                 WeixinJSBridge.on('menu:share:appmessage', function () {
                     WeixinJSBridge.invoke('sendAppMessage', {
                         img_url: shareData.imgUrl,
