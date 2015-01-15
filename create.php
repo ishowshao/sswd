@@ -91,7 +91,7 @@ file_put_contents($dataFileName, json_encode($data));
 </head>
 <body>
 <div>
-    <p>房间号如下，请把此页面发送给参与玩家或者让玩家扫二维码</p>
+    <p>房间号如下，可以用右上角“三个点”的按钮将此页面发送给参与玩家或者让玩家扫二维码</p>
     <p class="room-number"><?php echo $id ?></p>
     <div>
         <img src="http://ishowshao.com/phpqrcode/index.php?data=<?php echo urlencode('http://ishowshao.com/sswd/room.php?id=' . $id) ?>">
